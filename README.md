@@ -2,8 +2,7 @@
 
 Heavily based on https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944
 
-
-Please read the [Learning Go by examples: part 5 - Create a Game Boy Advance (GBA) game in Go](https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944) article in order to know more about this Git repository.
+For Tinygo package compatibility: https://tinygo.org/docs/reference/lang-support/stdlib/#time
 
 ## General
 
@@ -23,32 +22,22 @@ Brew:
 brew install tinygo
 brew install mgba
 
-`lc ./bin/mgba /usr/local/bin/mgba`
-
-or:
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/scraly/learning-go-by-examples/tree/main/go-gopher-gba)
 
 ## Run the app (during development)
 
 ```
-$ tinygo run -target=gameboy-advance gopher.go
-tinygo:ld.lld: warning: lld uses blx instruction, no object with architecture supporting feature detected
+task run
 ```
 
 ## Build the app
 
-`$ tinygo build -size short -o bin/gopher.elf -target=gameboy-advance gopher.go; mv bin/gopher.elf bin/gopher.gba`
-
-or
-
-`$ task build`
+`task build`
 
 ## Test the app/game
 
 Let's run our app on mGBA emulator:
 
-`$ mgba bin/gopher.gba`
+`task mgba`
 
 ![Gopher GBA game](doc/gopher-gba.png)
 

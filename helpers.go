@@ -2,6 +2,7 @@ package main
 
 import (
 	"runtime/interrupt"
+	"time"
 
 	"github.com/scraly/learning-go-by-examples/go-gopher-gba/fonts"
 	"tinygo.org/x/tinydraw"
@@ -9,7 +10,7 @@ import (
 )
 
 func drawGophers() {
-	// Display a textual message "Zurich" with Google colors
+	// Display a textual message "Gopher" with Google colors
 	tinyfont.DrawChar(display, &fonts.Bold24pt7b, 36, 60, 'G', gBlue)
 	tinyfont.DrawChar(display, &fonts.Bold24pt7b, 71, 60, 'o', gRed)
 	tinyfont.DrawChar(display, &fonts.Bold24pt7b, 98, 60, 'p', gYellow)
@@ -20,7 +21,7 @@ func drawGophers() {
 	// Display a "press START button" message - center
 	tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "Press START button", white)
 
-	// Display a textual message "Gopher" with Google colors
+	// Display a textual message "Zuri" with Google colors
 	tinyfont.DrawChar(display, &fonts.Bold24pt7b, 71, 130, 'Z', gBlue)
 	tinyfont.DrawChar(display, &fonts.Bold24pt7b, 98, 130, 'u', gRed)
 	tinyfont.DrawChar(display, &fonts.Bold24pt7b, 126, 130, 'r', gYellow)
@@ -29,6 +30,9 @@ func drawGophers() {
 	// Display two gophers
 	tinyfont.DrawChar(display, &fonts.Regular58pt, 5, 140, 'B', green)
 	tinyfont.DrawChar(display, &fonts.Regular58pt, 195, 140, 'X', red)
+
+	tinydraw.Rectangle(display, int16(0), int16(0), screenWidth, screenHeight, red)
+
 }
 
 func update(interrupt.Interrupt) {
@@ -85,6 +89,8 @@ func update(interrupt.Interrupt) {
 		y = y + 20
 		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
 	}
+	x, y = checkBorder(x, y)
+
 }
 
 func clearScreen() {
@@ -94,4 +100,25 @@ func clearScreen() {
 		screenWidth, screenHeight,
 		black,
 	)
+	tinydraw.Rectangle(display, int16(0), int16(0), screenWidth, screenHeight, red)
+
+}
+
+func checkBorder(x, y int16) (int16, int16) {
+	var border int16 = 10
+	// I think compensation is needed due to the size of the gopher
+	var x_comp int16 = 40
+	var y_comp int16 = 40
+	// if hit border, kill
+	if (x >= screenWidth-border-x_comp) || (x <= border) || (y <= border+y_comp) || (y >= screenHeight-border) {
+		clearScreen()
+		tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+		x = 100
+		y = 100
+		time.Sleep(time.Second * 3)
+		clearScreen()
+		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+	}
+	return x, y
+
 }
