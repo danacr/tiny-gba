@@ -19,15 +19,19 @@ This simple app/game run on Game Boy Advance portable console and:
 Install Go in 1.16 version minimum.
 
 Brew:
+```bash
+brew install go-task
 brew install tinygo
 brew install mgba
-
+```
 
 ## Run the app (during development)
 
 ```
 task run
 ```
+
+Note: `time` does not work: https://remyhax.xyz/posts/gba-blog/ https://github.com/tinygo-org/tinygo/issues/1578
 
 ## Build the app
 

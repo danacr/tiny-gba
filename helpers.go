@@ -51,30 +51,15 @@ func update(interrupt.Interrupt) {
 		drawGophers()
 	// Gopher go to the right
 	case keyRIGHT:
-		// Clear display by drawing a gopher in black
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
-		x = x + 10
-		// display gopher at right
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+		x, y = move(x, y, 10, false, true)
 	// Gopher go to the left
 	case keyLEFT:
-		// Clear display
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
-		x = x - 10
-		// display gopher at right
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+		x, y = move(x, y, 10, false, false)
 	// Gopher go to the down
 	case keyDOWN:
-		// Clear display
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
-		y = y + 10
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
-	// Gopher go to the up
+		x, y = move(x, y, 10, true, true)
 	case keyUP:
-		// Clear display
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
-		y = y - 10
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+		x, y = move(x, y, 10, true, false)
 	//Gopher jump
 	case keyA:
 		// Clear display
@@ -90,6 +75,27 @@ func update(interrupt.Interrupt) {
 	}
 	x, y = checkBorder(x, y)
 
+}
+
+func move(current_x, current_y, pixels int16, vertical, positive bool) (int16, int16) {
+	// Clear display by drawing a gopher in black
+	tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
+
+	if vertical {
+		if positive {
+			y = y + pixels
+		} else {
+			y = y - pixels
+		}
+	} else {
+		if positive {
+			x = x + pixels
+		} else {
+			x = x - pixels
+		}
+	}
+	tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+	return x, y
 }
 
 func clearScreen() {
@@ -120,11 +126,9 @@ func checkBorder(x, y int16) (int16, int16) {
 }
 
 func killScreen() {
-	clearScreen()
-	tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
-	clearScreen()
-	tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
-	clearScreen()
-	tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+	for i := 1; i <= 3; i++ {
+		clearScreen()
+		tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+	}
 	clearScreen()
 }

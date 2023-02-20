@@ -62,7 +62,7 @@ func main() {
 	// Display Gopher text message and draw our Gophers
 	drawGophers()
 
-	// Creates an interrupt that will call the "update" fonction below, hardware way to display things on the screen
+	// Creates an interrupt that will call the "update" function below, hardware way to display things on the screen
 	interrupt.New(machine.IRQ_VBLANK, update).Enable()
 
 	// Infinite loop to avoid exiting the application
