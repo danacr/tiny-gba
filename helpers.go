@@ -27,7 +27,7 @@ func drawGophers() {
 	tinyfont.DrawChar(display, &fonts.Bold24pt7b, 144, 130, 'i', gGreen)
 
 	// Display two gophers
-	tinyfont.DrawChar(display, &fonts.Regular58pt, 5, 140, 'B', green)
+	tinyfont.DrawChar(display, &fonts.Regular58pt, 5, 140, 'J', green)
 	tinyfont.DrawChar(display, &fonts.Regular58pt, 195, 140, 'X', red)
 
 	tinydraw.Rectangle(display, int16(0), int16(0), screenWidth, screenHeight, red)
@@ -109,19 +109,25 @@ func checkBorder(x, y int16) (int16, int16) {
 	var y_comp int16 = 40
 	// if hit border, kill
 	if (x >= screenWidth-border-x_comp) || (x <= border) || (y <= border+y_comp) || (y >= screenHeight-border) {
-		killScreen()
 		x = 100
 		y = 100
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+		killScreen()
 	}
 	return x, y
 
 }
 
 func killScreen() {
-	for i := 1; i <= 3; i++ {
+	for {
 		clearScreen()
-		tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+		tinyfont.WriteLine(display, &tinyfont.TomThumb, 105, 30, "You DIED!", red)
+		tinyfont.WriteLine(display, &tinyfont.TomThumb, 80, 130, "Press start to restart", red)
+		tinyfont.DrawChar(display, &fonts.Regular58pt, 100, 100, 'C', red)
+		if regKEYPAD.Get() == keySELECT {
+			break
+		}
+		break
+		clearScreen()
+
 	}
-	clearScreen()
 }
