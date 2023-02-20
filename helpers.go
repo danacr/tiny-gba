@@ -62,16 +62,9 @@ func update(interrupt.Interrupt) {
 		x, y = move(x, y, 10, true, false)
 	//Gopher jump
 	case keyA:
-		// Clear display
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
-		// Display the gopher up
-		y = y - 20
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+		x, y = move(x, y, 20, true, false)
 		// Clear the display
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
-		// Display the gopher down
-		y = y + 20
-		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
+		x, y = move(x, y, 20, true, true)
 	}
 	x, y = checkBorder(x, y)
 
