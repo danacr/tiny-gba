@@ -1,14 +1,7 @@
-# go-gopher-gba
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/scraly/learning-go-by-examples)](https://goreportcard.com/report/github.com/scraly/learning-go-by-examples)
 
-This repo contains a simple game (yes, very very very simple game) for Game Boy Advance (GBA) in Go, with a basic code organization.
+Heavily based on https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944
 
-We use:
-* [TinyGo](https://tinygo.org/)
-* [TinyFont](https://github.com/tinygo-org/tinyfont)
-* [TinyDraw](https://github.com/tinygo-org/tinydraw)
-* [Gopher font](http://2ttf.com/HCQ3PvcaQ4U) (thanks [@rakyll](https://twitter.com/rakyll) <3)
 
 Please read the [Learning Go by examples: part 5 - Create a Game Boy Advance (GBA) game in Go](https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944) article in order to know more about this Git repository.
 
@@ -26,9 +19,11 @@ This simple app/game run on Game Boy Advance portable console and:
 
 Install Go in 1.16 version minimum.
 
-Install [TinyGo](https://tinygo.org/getting-started/install/).
+Brew:
+brew install tinygo
+brew install mgba
 
-Install [mGBA](https://tinygo.org/getting-started/install/macos/) emulator.
+`lc ./bin/mgba /usr/local/bin/mgba`
 
 or:
 
