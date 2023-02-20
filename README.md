@@ -1,6 +1,8 @@
+# Gopher Zuri
 
+![Gopher GBA game](doc/gopher-gba.png)
 
-Heavily based on https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944
+Heavily based on [Learning Go by examples by Aurélie Vache](https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944) article series on Dev.to.
 
 For Tinygo package compatibility: https://tinygo.org/docs/reference/lang-support/stdlib/#time
 
@@ -43,7 +45,6 @@ Let's run our app on mGBA emulator:
 
 `task mgba`
 
-![Gopher GBA game](doc/gopher-gba.png)
 
 ### mGBA Controls
 
@@ -58,3 +59,12 @@ R: S
 Start: Enter
 Select: Backspace
 ```
+
+### My changes:
+
+- I've refactored some of the functions
+- Improved the speed of the Gopher movement by implementing the [redrawing the gopher](https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944#comment-1i83i)
+- Added a check if the gopher is within the display frame
+- Added a Game Kill Screen :)
+
+![Gopher Sceen](doc/gopher-screen.png)
