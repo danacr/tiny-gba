@@ -2,7 +2,6 @@ package main
 
 import (
 	"runtime/interrupt"
-	"time"
 
 	"github.com/scraly/learning-go-by-examples/go-gopher-gba/fonts"
 	"tinygo.org/x/tinydraw"
@@ -111,14 +110,21 @@ func checkBorder(x, y int16) (int16, int16) {
 	var y_comp int16 = 40
 	// if hit border, kill
 	if (x >= screenWidth-border-x_comp) || (x <= border) || (y <= border+y_comp) || (y >= screenHeight-border) {
-		clearScreen()
-		tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+		killScreen()
 		x = 100
 		y = 100
-		time.Sleep(time.Second * 3)
-		clearScreen()
 		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
 	}
 	return x, y
 
+}
+
+func killScreen() {
+	clearScreen()
+	tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+	clearScreen()
+	tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+	clearScreen()
+	tinyfont.WriteLine(display, &tinyfont.TomThumb, 85, 90, "You DIED!", red)
+	clearScreen()
 }
