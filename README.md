@@ -67,5 +67,6 @@ Select: Backspace
 - Added a check if the gopher is within the display frame
 - Added a Game Kill Screen :)
 - Added a score that is calculated based on number of interrupts passed
+- Added wind to generate random movement, I think now we can call it a game
 
 ![Gopher Sceen](doc/gopher-screen.png)

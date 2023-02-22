@@ -44,7 +44,9 @@ func update(interrupt.Interrupt) {
 	case keySTART:
 		// Clear display
 		clearScreen()
+		// Reset Global State
 		score = 0
+		active = true
 		// Display gopher
 		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
 	// Go back to Menu
@@ -68,11 +70,38 @@ func update(interrupt.Interrupt) {
 		// Clear the display
 		x, y = move(x, y, 20, true, true)
 	}
+	// Add random movement
+	x, y = wind(x, y)
+
+	// check collision
 	x, y = checkBorder(x, y)
+
+	// Increment Global Counter
 	score = score + 1
 
 }
 
+// Add random movement to bottom left of screen
+func wind(x, y int16) (int16, int16) {
+	if active {
+		// increase wind_power as score goes higher
+		var wind_power int16 = int16(score / 20)
+
+		x, y = move(x, y, wind_power, random(), random())
+	}
+	return x, y
+}
+
+// importing math/random overflew my game
+func random() bool {
+	if score%2 == 0 {
+		return false
+	} else {
+		return true
+	}
+}
+
+// move abstraction
 func move(current_x, current_y, pixels int16, vertical, positive bool) (int16, int16) {
 	// Clear display by drawing a gopher in black
 	tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', black)
@@ -94,6 +123,7 @@ func move(current_x, current_y, pixels int16, vertical, positive bool) (int16, i
 	return x, y
 }
 
+// Overwrite the entire screen
 func clearScreen() {
 	tinydraw.FilledRectangle(
 		display,
@@ -105,6 +135,7 @@ func clearScreen() {
 
 }
 
+// Check for collision with compensation
 func checkBorder(x, y int16) (int16, int16) {
 	var border int16 = 10
 	// I think compensation is needed due to the size of the gopher
@@ -120,6 +151,7 @@ func checkBorder(x, y int16) (int16, int16) {
 
 }
 
+// Display end screen and pause game
 func killScreen() {
 	for {
 		clearScreen()
@@ -128,6 +160,7 @@ func killScreen() {
 		tinyfont.WriteLine(display, &tinyfont.TomThumb, 115, 55, strconv.Itoa(int(score)), red)
 		tinyfont.WriteLine(display, &tinyfont.TomThumb, 80, 130, "Press start to restart", red)
 		tinyfont.DrawChar(display, &fonts.Regular58pt, 95, 110, 'C', red)
+		active = false
 		if regKEYPAD.Get() == keySELECT {
 			break
 		}
