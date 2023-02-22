@@ -70,3 +70,5 @@ Select: Backspace
 - Added wind to generate random movement, I think now we can call it a game
 
 ![Gopher Sceen](doc/gopher-screen.png)
+
+>Note: sometimes the game randomly crashes :)
