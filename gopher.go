@@ -50,7 +50,7 @@ var (
 	y int16 = 100 //TODO: vertically center
 
 	// Global Score that also works as a time/counter
-	score int32 = 0
+	score int16 = 0
 
 	// Global state, if game is not paused
 	active bool = false
