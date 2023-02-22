@@ -18,8 +18,9 @@ func update(interrupt.Interrupt) {
 	// Start the "game"
 	case keySTART:
 		startGame()
-	// Go back to Menu
+	// Go back to Menu and pause
 	case keySELECT:
+		active = false
 		clearScreen()
 		drawGophers()
 	// Gopher go to the right
