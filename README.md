@@ -66,5 +66,6 @@ Select: Backspace
 - Improved the speed of the Gopher movement by implementing the [redrawing the gopher](https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944#comment-1i83i)
 - Added a check if the gopher is within the display frame
 - Added a Game Kill Screen :)
+- Added a score that is calculated based on number of interrupts passed
 
 ![Gopher Sceen](doc/gopher-screen.png)

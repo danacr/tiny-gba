@@ -46,10 +46,10 @@ var (
 	gGreen  = color.RGBA{15, 157, 88, 255}
 
 	// Coordinates
-	x     int16 = 100 //TODO: horizontally center
-	y     int16 = 100 //TODO: vertically center
-	old_x int16 = 100
-	old_y int16 = 100
+	x int16 = 100 //TODO: horizontally center
+	y int16 = 100 //TODO: vertically center
+
+	score int64 = 0
 )
 
 func main() {

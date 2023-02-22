@@ -2,6 +2,7 @@ package main
 
 import (
 	"runtime/interrupt"
+	"strconv"
 
 	"github.com/scraly/learning-go-by-examples/go-gopher-gba/fonts"
 	"tinygo.org/x/tinydraw"
@@ -43,6 +44,7 @@ func update(interrupt.Interrupt) {
 	case keySTART:
 		// Clear display
 		clearScreen()
+		score = 0
 		// Display gopher
 		tinyfont.DrawChar(display, &fonts.Regular58pt, x, y, 'B', green)
 	// Go back to Menu
@@ -67,6 +69,7 @@ func update(interrupt.Interrupt) {
 		x, y = move(x, y, 20, true, true)
 	}
 	x, y = checkBorder(x, y)
+	score = score + 1
 
 }
 
@@ -121,8 +124,10 @@ func killScreen() {
 	for {
 		clearScreen()
 		tinyfont.WriteLine(display, &tinyfont.TomThumb, 105, 30, "You DIED!", red)
+		tinyfont.WriteLine(display, &tinyfont.TomThumb, 110, 45, "Score", red)
+		tinyfont.WriteLine(display, &tinyfont.TomThumb, 115, 55, strconv.Itoa(int(score)), red)
 		tinyfont.WriteLine(display, &tinyfont.TomThumb, 80, 130, "Press start to restart", red)
-		tinyfont.DrawChar(display, &fonts.Regular58pt, 100, 100, 'C', red)
+		tinyfont.DrawChar(display, &fonts.Regular58pt, 95, 110, 'C', red)
 		if regKEYPAD.Get() == keySELECT {
 			break
 		}
