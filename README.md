@@ -1,10 +1,12 @@
 # Gopher Zuri
 
-![Gopher GBA game](doc/gopher-gba.png)
+![Presentation](doc/presentation.png)
+
+[Recording](https://www.youtube.com/watch?v=8QsvREVQ3Dc) and [slides](https://docs.google.com/presentation/d/1Ysgks0HLChBmqPH6e3A4Z_ixQlsNtVy4_WhBkVMtPHE/edit?usp=sharing)
 
 Heavily based on [Learning Go by examples by Aurélie Vache](https://dev.to/aurelievache/learning-go-by-examples-part-5-create-a-game-boy-advance-gba-game-in-go-5944) article series on Dev.to.
 
-For Tinygo package compatibility: https://tinygo.org/docs/reference/lang-support/stdlib/#time
+Please check [Tinygo package compatibility](https://tinygo.org/docs/reference/lang-support/stdlib/#time) before importing different packages
 
 ## General
 
@@ -32,6 +34,7 @@ brew install mgba
 ```
 task run
 ```
+![Gopher GBA game](doc/gopher-gba.png)
 
 Note: `time` does not work: https://remyhax.xyz/posts/gba-blog/ https://github.com/tinygo-org/tinygo/issues/1578
 
