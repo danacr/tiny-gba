@@ -48,7 +48,6 @@ Let's run our app on mGBA emulator:
 
 `task mgba`
 
-
 ### mGBA Controls
 
 Controls are configurable in the **settings** menu of **mGBA**. Many game controllers should be automatically mapped by default. 
@@ -75,3 +74,21 @@ Select: Backspace
 ![Gopher Sceen](doc/gopher-screen.png)
 
 >Note: sometimes the game randomly crashes :)
+
+### M1 Mac support:
+If you get the following error:
+```bash
+MacBook-Air tiny-gba % task build
+task: [build] GOFLAGS=-mod=mod tinygo build -size short -o bin/gopher.gba -target=gameboy-advance .
+/opt/homebrew/bin/tinygo: line 2: /opt/homebrew/Cellar/tinygo/0.27.0/libexec/tinygo: Bad CPU type in executable
+/opt/homebrew/bin/tinygo: line 2: /opt/homebrew/Cellar/tinygo/0.27.0/libexec/tinygo: Undefined error: 0
+task: Failed to run task "build": exit status 1
+```
+
+Do this:
+```bash
+softwareupdate --install-rosetta
+GOFLAGS=-mod=mod arch -x86_64 tinygo build -size short -o bin/gopher.gba -target=gameboy-advance .
+```
+
+It seems that Mac OS will remember to run this binary in x86 mode. You can now use the regular `task build`, no need to modify the `Taskfile.yml`
